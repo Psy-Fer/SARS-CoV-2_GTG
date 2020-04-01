@@ -16,13 +16,24 @@ pip3 install edlib
 python3 compare_ref.py -r1 base_reference.fasta -r2 new_reference.fasta
 ```
 
-### RAMPART
+## RAMPART
+
+### Native barcodes
+
+NB01, NB02, etc...
 
 ```
-
 rampart --verbose --protocol /home/grid/SARS-CoV-2_GTG/protocols/Kirby/V1/ --ports 3000 3001 --basecalledPath /data/FLFL030920/FLFL030920/20200330_0557_X2_ACW369_55e7e4ce/fastq_pass/
+```
+
+### Rapid barcodes
+
+BC01, BC02, etc...
 
 ```
+rampart --verbose --protocol /home/grid/SARS-CoV-2_GTG/protocols/Kirby/V1/ --ports 5000 5001 --basecalledPath /data/FQFR033922-2/FQFR033922-2/20200401_0106_X5_ACL109_433d9d25/fastq_pass/ --annotationOptions require_two_barcodes="False" barcode_set="rapid"
+```
+
 
 ## Analysis
 

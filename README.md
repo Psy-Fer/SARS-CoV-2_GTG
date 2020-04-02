@@ -32,6 +32,7 @@ BC01, BC02, etc...
 
 ```
 rampart --verbose --protocol /home/grid/SARS-CoV-2_GTG/protocols/Kirby/V1/ --ports 5000 5001 --basecalledPath /data/FQFR033922-2/FQFR033922-2/20200401_0106_X5_ACL109_433d9d25/fastq_pass/ --annotationOptions require_two_barcodes="False" barcode_set="rapid"
+
 ```
 
 
@@ -51,11 +52,21 @@ artic demultiplex --threads 4 kirby-3_fastq_pass.fastq
 
 cd ..
 
-for bc in {01..09}; do mkdir barcode; cd barcode; artic minion --normalise 200 --threads 4 --scheme-directory ~/SARS-CoV-2_GTG/protocols/Kirby/schemes --read-file ../asm/kirby-3_fastq_pass-NB.fastq --fast5-directory ../fast5_pass --sequencing-summary ../asm/kirby-3_sequencing_summary.txt nCoV-2019/V1 kirby-3; cd ../;  done
+for bc in {01..09}; do mkdir barcode${bc}; cd barcode${bc}; artic minion --normalise 200 --threads 4 --scheme-directory ~/SARS-CoV-2_GTG/protocols/Kirby/schemes --read-file ../asm/kirby-3_fastq_pass-NB${bc}.fastq --fast5-directory ../fast5_pass --sequencing-summary ../asm/kirby-3_sequencing_summary.txt nCoV-2019/V1 kirby-3; cd ../;  done
 
 for file in barcode*; do tar -cf kirby-3_samples_11-19_nanopolish_.tar ; done
 
 rsync --progress ./*.tar kyle:/volume3/EXT2_Projects/SARS-CoV-2/kirby/kirby-3/
+```
+
+#### Rapid barcodes
+
+```
+
+porechop --verbosity 2 --untrimmed -i "kirby-6_fastq_pass.fastq" -b ./ --rapid_barcodes --discard_middle --barcode_threshold 80 --threads 4 --check_reads 10000 --barcode_diff 5 > kirby-6_fastq_pass.fastq.demultiplexreport.txt
+
+for file in BC*.fastq; do mv $file kirby-6_fastq_pass-${file}; done
+
 ```
 
 

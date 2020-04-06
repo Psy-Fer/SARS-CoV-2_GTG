@@ -10,6 +10,41 @@ We are doing both nanopolish and medaka for all runs. So far, so good.
 Please let me know if anything is unclear, or you have suggestions or questions.
 
 
+## Making custom primer scheme
+
+Working from the original artic-network protocol, we need TWO folders of files.
+The first, is the protocol folder, in this case `protocols/Kirby/V1`
+The second, is the schemes folder, in this case `protocols/Kirby/schemes/nCoV-2019/V1`
+
+The First, is used with RAMPART in order to align and display the data with your custom primer set.
+
+The second, is used with the artic bioinformatic analysis SOP after sequencing.
+
+#### Building the RAMPART protocol
+
+If the reference is the same as used here, then you can simply copy
+`genome.json`
+`references.fasta`
+to your new protocol folder. Otherwise you will need to build these yourself.
+(shoot me a message and I can help)
+
+for `primers.json`, copy the main structure, but replace the values with your amplicon [start,stop] positions
+
+```
+"amplicons": [
+    [31, 2592],
+    [1876, 4450],
+    [4295, 6873],
+    ...
+```
+
+Notice that each primer is overlapping a bit here, so you are placing them as A/B/A/B or 1/2/1/2...
+
+The protocol.json is where you can place metadata for the run. I simply use this to name it.
+Fill in as you please
+
+#### Building the artic protocol
+
 
 
 
@@ -113,7 +148,7 @@ UNSW/Kirby Institute: Rowena Bull
 
 PoW:
 
-SYD/WIMR:
+SYD/WIMR: John-Sebastian Eden
 
 (need to add in others)
 

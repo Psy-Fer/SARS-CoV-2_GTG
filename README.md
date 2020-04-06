@@ -45,7 +45,43 @@ Fill in as you please
 
 #### Building the artic protocol
 
+Again, if the reference is the same, nothing needs to be changed for
+`nCoV-2019.reference.fasta` file
 
+Then, if your primer bed file looks like This
+
+```
+MN908947.3	31	2592	A1
+MN908947.3	4295	6873	A2
+MN908947.3	8596	11074	A3
+MN908947.3	12711	15246	A4
+MN908947.3	16847	19278	A5
+MN908947.3	21358	23847	A6
+MN908947.3	25602	28172	A7
+MN908947.3	1876	4450	B1
+MN908947.3	6287	8851	B2
+MN908947.3	10363	12802	B3
+MN908947.3	14546	17152	B4
+MN908947.3	18897	21455	B5
+MN908947.3	23123	25673	B6
+MN908947.3	27447	29866	B7
+
+```
+
+Then your `nCoV-2019.scheme.bed` looks like this:
+
+```
+MN908947.3	31	54	nCoV-2019_1_LEFT	nCoV-2019_1
+MN908947.3	2569	2592	nCoV-2019_1_RIGHT	nCoV-2019_1
+MN908947.3	4295	4321	nCoV-2019_2_LEFT	nCoV-2019_2
+MN908947.3	6847	6873	nCoV-2019_2_RIGHT	nCoV-2019_2
+MN908947.3	8596	8619	nCoV-2019_3_LEFT	nCoV-2019_1
+MN908947.3	11049	11074	nCoV-2019_3_RIGHT	nCoV-2019_1
+...
+```
+Where you count up each pair in the 4th column, and 1 and 2 stand in for A and B in the 5th column.
+
+(Let me know if this isn't clear, or you have a better way of explaining it)
 
 
 ## RAMPART

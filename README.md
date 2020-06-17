@@ -176,6 +176,27 @@ pip3 install edlib
 python3 compare_ref.py -r1 base_reference.fasta -r2 new_reference.fasta
 ```
 
+# Scratch space
+
+
+New commands - experimental
+
+    artic gather --min-length 300 --max-length 2700 --prefix PQPR071978 --directory /data/PQPR071978/20200527_0703_3D_PAE51904_eb3de804/ --fast5-directory /data/PQPR071978/20200527_0703_3D_PAE51904_eb3de804/
+
+    # Native
+    artic demultiplex --threads 32 PQPR071978_fastq_pass.fastq
+
+    # Rapid
+    porechop --verbosity 2 --untrimmed -i "PQPR071978_fastq_pass.fastq" -b ./ --rapid_barcodes --discard_middle --barcode_threshold 80 --threads 32 --check_reads 10000 --barcode_diff 5 > PQPR071978_fastq_pass.fastq.demultiplexreport.txt
+
+    # Nanopolish
+    RUN=PQPR071978 && for bc in {01..12}; do mkdir barcode${bc}; cd barcode${bc}; artic minion --normalise 200 --threads 32 --scheme-directory /directflow/KCCGGenometechTemp/projects/jamfer/SARS-CoV-2/SARS-CoV-2_GTG/protocols/Kirby/schemes --read-file ../../base/${RUN}_fastq_pass-BC${bc}.fastq --fast5-directory ../../${RUN}/*/fast5_pass --sequencing-summary ../../${RUN}_summary.txt nCoV-2019/V1 ${RUN}; cd ../; done
+    
+    # Medaka
+    RUN=PQPR071978 && for bc in {01..12}; do mkdir barcode${bc}; cd barcode${bc}; artic minion --minimap2 --medaka --normalise 200 --threads 32 --scheme-directory /directflow/KCCGGenometechTemp/projects/jamfer/SARS-CoV-2/SARS-CoV-2_GTG/protocols/Kirby/schemes --read-file ../../base/${RUN}_fastq_pass-BC${bc}.fastq nCoV-2019/V1 ${RUN}; cd ../; done
+
+
+
 
 ## Acknowledgements
 

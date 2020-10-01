@@ -191,11 +191,12 @@ New commands - experimental
 
     # Nanopolish
     RUN=PQPR071978 && for bc in {01..12}; do mkdir barcode${bc}; cd barcode${bc}; artic minion --normalise 200 --threads 32 --scheme-directory /directflow/KCCGGenometechTemp/projects/jamfer/SARS-CoV-2/SARS-CoV-2_GTG/protocols/Kirby/schemes --read-file ../../base/${RUN}_fastq_pass-BC${bc}.fastq --fast5-directory ../../${RUN}/*/fast5_pass --sequencing-summary ../../${RUN}_summary.txt nCoV-2019/V1 ${RUN}; cd ../; done
-    
+
     # Medaka
     RUN=PQPR071978 && for bc in {01..12}; do mkdir barcode${bc}; cd barcode${bc}; artic minion --minimap2 --medaka --normalise 200 --threads 32 --scheme-directory /directflow/KCCGGenometechTemp/projects/jamfer/SARS-CoV-2/SARS-CoV-2_GTG/protocols/Kirby/schemes --read-file ../../base/${RUN}_fastq_pass-BC${bc}.fastq nCoV-2019/V1 ${RUN}; cd ../; done
 
-
+    # dRNA - VERY experimental
+    rampart --verbose --protocol /home/prom/SARS-CoV-2_GTG/protocols/Kirby/RNA --ports 6010 6011 --basecalledPath /data/<project>/*/*/fastq_pass/
 
 
 ## Acknowledgements

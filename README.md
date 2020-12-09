@@ -201,17 +201,11 @@ New commands - experimental
 
 ## Acknowledgements
 
-This is the joint work of our lab:
+This is the joint work with
 
-[Garvan Institute](https://www.garvan.org.au/): Ira Deveson, Jillian Hammond, Igor Stevanovski, Hasindu Gamaarachchi, from the Genomic Technologies team.
+Rowena A. Bull, Thiruni N. Adikari, James M. Ferguson, Jillian M. Hammond, Igor Stevanovski, Alicia G. Beukers, Zin Naing, Malinna Yeang, Andrey Verich, Hasindu Gamaarachchi, Ki Wook Kim, Fabio Luciani, Sacha Stelzer-Braid, John-Sebastian Eden, William D. Rawlinson, Sebastiaan J. van Hal & Ira W. Deveson
 
-UNSW/Kirby Institute: Rowena Bull
-
-PoW:
-
-SYD/WIMR: John-Sebastian Eden
-
-(need to add in others)
+See the paper here: https://www.nature.com/articles/s41467-020-20075-6
 
 ## License
 

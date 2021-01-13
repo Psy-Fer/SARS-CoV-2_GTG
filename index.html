@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="None">
+  
+  <link rel="shortcut icon" href="img/favicon.ico">
+  <title>Home - SARS-CoV-2 GTG lab documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Home";
+    var mkdocs_page_input_path = "index.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="js/jquery-2.1.1.min.js" defer></script>
+  <script src="js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="." class="icon icon-home"> SARS-CoV-2 GTG lab documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href=".">Home</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#welcome-to-gtg-sars-cov-2-docs">Welcome to GTG SARS-CoV-2 docs</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#related-work">Related work</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="protocols/">Protocols</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="seq/">Sequencing</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="realtime/">Real-time monitoring</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="analysis/">Analysis</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="tute/">Tutorial</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="inter/">interARTIC</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href=".">SARS-CoV-2 GTG lab documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Home</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="welcome-to-gtg-sars-cov-2-docs">Welcome to GTG SARS-CoV-2 docs</h1>
+<p>Here is the documentation for running SARS-CoV-2 amplicons through nanopore sequencing to get consensus genomes and find their lineages.</p>
+<p>Most of the information here is tested thoroughly with the Eden 2.5kb amplicon system, using the rapid barcoding kits, on PromethION flowcells. Most people will be using something else, and we recommend using the Midnight 1.2kb amplicons, or artic V3 amplicons.</p>
+<p>Parts of the pipelines must be modified for use with the appropriate amplicon scheme. We have tried to make it clear where in the processes these changes need to be implemented, along with some tips along the way.</p>
+<p>Please let us know if you have any questions, or require assistance.</p>
+<h3 id="related-work">Related work</h3>
+<p><strong>Publication: <a href="https://www.nature.com/articles/s41467-020-20075-6">Analytical validity of nanopore sequencing for rapid SARS-CoV-2 genome analysis</a></strong></p>
+<p><strong>Pre-print: <a href="https://www.biorxiv.org/content/10.1101/2020.08.04.236893v2">Analytical validity of nanopore sequencing for rapid SARS-CoV-2 genome analysis</a></strong></p>
+<p><strong>Git-hub: <a href="https://github.com/Psy-Fer/SARS-CoV-2_GTG">SARS-CoV-2_GTG</a></strong></p>
+<p><strong>Nanopore: <a href="https://nanoporetech.com/">Oxford Nanopore Technologies</a></strong></p>
+<p><strong>RAMPART: <a href="https://github.com/artic-network/rampart">artic-network/rampart</a></strong></p>
+<p><strong>ARTIC (300bp): <a href="https://www.protocols.io/view/ncov-2019-sequencing-protocol-v3-locost-bh42j8ye">nCoV-2019 sequencing protocol v3 (LoCost) V.3</a></strong></p>
+<p><strong>Midnight (1200bp): <a href="https://www.protocols.io/view/ncov-2019-sequencing-protocol-rapid-barcoding-1200-bh7hj9j6">nCoV-2019 sequencing protocol (RAPID barcoding, 1200bp amplicon) V.4</a></strong></p>
+<p><strong>Eden (2500bp): <a href="https://www.protocols.io/view/sars-cov-2-genome-sequencing-using-long-pooled-amp-befyjbpw">SARS-CoV-2 Genome Sequencing Using Long Pooled Amplicons on Illumina Platforms</a></strong></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="protocols/" class="btn btn-neutral float-right" title="Protocols">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+        <span style="margin-left: 15px"><a href="protocols/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme.js" defer></script>
+      <script src="search/main.js" defer></script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.0.4
+Build Date UTC : 2021-01-13 16:46:14
+-->

@@ -77,16 +77,9 @@
         
             <li><a class="toctree-l3" href="#miniconda">miniconda</a></li>
         
+            <li><a class="toctree-l3" href="#artic-and-rampart">ARTIC and RAMPART</a></li>
+        
         </ul>
-    
-
-    <li class="toctree-l2"><a href="#windows">Windows</a></li>
-    
-
-    <li class="toctree-l2"><a href="#macos">MacOS</a></li>
-    
-
-    <li class="toctree-l2"><a href="#centos">CentOS</a></li>
     
 
     </ul>
@@ -180,6 +173,7 @@ Please, press ENTER to continue
 </code></pre>
 <p>Press ENTER</p>
 <p>The Lisence information will apper. Press SPACE multiple times to scroll to the bottom.</p>
+<p><strong>insert lisence image</strong></p>
 <pre><code>Last updated September 28, 2020
 
 
@@ -281,12 +275,22 @@ unset __conda_setup
 <p>Yours will look slightly different due to different paths.
 We need to copy this information into a separate shell file, then remove this from <code>~/.bashrc</code> .</p>
 <p>copy everything similar to above</p>
-<p>then copy into a file called something like <code>conda_init.sh</code></p>
+<p>then copy into a file called something like <code>~/conda_init.sh</code></p>
 <p>and remove the same section from <code>~/.bashrc</code></p>
 <p><strong>Close and open terminal again</strong></p>
-<h1 id="windows">Windows</h1>
-<h1 id="macos">MacOS</h1>
-<h1 id="centos">CentOS</h1>
+<p>To activate conda, we can now run</p>
+<pre><code>source ~/conda_init.sh
+</code></pre>
+<h2 id="artic-and-rampart">ARTIC and RAMPART</h2>
+<p>Download the repo from github</p>
+<pre><code>cd
+git clone https://github.com/artic-network/artic-ncov2019.git
+d artic-ncov2019
+conda env remove -n artic-ncov2019
+conda env create -f environment.yml
+</code></pre>
+<p><strong>insert image of venv installing</strong></p>
+<p>Other Operating Systems will work, but may need system specific changes to installation method. Let us know if you would like this extended to other Operating Systems.</p>
               
             </div>
           </div>

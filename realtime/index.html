@@ -79,6 +79,10 @@
         
             <li><a class="toctree-l3" href="#installation">Installation</a></li>
         
+            <li><a class="toctree-l3" href="#protocol-files">Protocol files</a></li>
+        
+            <li><a class="toctree-l3" href="#experiment-files">Experiment files</a></li>
+        
         </ul>
     
 
@@ -139,7 +143,219 @@
 <p><strong>RAMPART: <a href="https://github.com/artic-network/rampart">artic-network/rampart</a></strong></p>
 <p>Here is how we set it up and run it for modified protocols.</p>
 <h3 id="installation">Installation</h3>
-<p>Please see </p>
+<p>Please see Intallation page for conda and repository setup.</p>
+<p>For use, please refer to the relevent protocol.</p>
+<h2 id="protocol-files">Protocol files</h2>
+<h3 id="artic-v3">ARTIC V3</h3>
+<p>Each protocol with different primer/amplicon sets, will need their own configuration files to work with RAMPART (and the ARTIC analysis pipeline too).</p>
+<p>For RAMPART, the default files for artic V3 files are located in (path depends on install location of ncov2019 git)</p>
+<pre><code>--protocol ~/artic-ncov2019/rampart/
+</code></pre>
+<p>it contains the following files:</p>
+<pre><code>genome.json
+primers.json
+protocol.json
+README.md
+references.fasta
+</code></pre>
+<p>If the reference is the same as used here, then you can simply copy genome.json references.fasta to your new protocol folder. Otherwise you will need to build these yourself. (shoot me a message and I can help)</p>
+<p>for primers.json, copy the main structure, but replace the values with your amplicon [start,stop] positions</p>
+<pre><code>{
+"name": "nCoV2019 primer scheme v1.0",
+"amplicons": [
+    [30, 410],
+    [320, 726],
+    [642, 1028],
+    [943, 1337],
+    [1242, 1651],
+    [1573, 1964],
+    [1875, 2269],
+    ...
+</code></pre>
+<p>Notice that each primer is overlapping a bit here, so you are placing them as A/B/A/B or 1/2/1/2...</p>
+<p>The protocol.json is where you can place some information about the protocol and various thresholds for depth/coverage</p>
+<pre><code>{
+"name": "ARTIC nCoV2019 protocol v1.0",
+"description": "Amplicon based sequencing of novel coronavirus 2019 (nCoV2019).",
+"url": "http://artic.network/",
+"displayOptions": {
+    "coverageThresholds": {
+        "&gt;200x": 200, "&gt;100x": 100, "&gt;20x": 20, "0x": 0
+        }
+    }
+}
+</code></pre>
+<h3 id="eden-25kb">Eden 2.5kb</h3>
+<p>Download RAMPART protocol files</p>
+<pre><code>cd
+git clone https://github.com/Psy-Fer/SARS-CoV-2_GTG.git
+</code></pre>
+<p>protocol located in</p>
+<pre><code>--protocol ~/SARS-CoV-2_GTG/protocols/Kirby/V1/
+</code></pre>
+<h3 id="midnight-12kb">Midnight 1.2kb</h3>
+<p>Download RAMPART protocol files (similar to Eden method above)</p>
+<pre><code>cd
+git clone https://github.com/Psy-Fer/SARS-CoV-2_GTG.git
+</code></pre>
+<p>protocol located in</p>
+<pre><code>--protocol ~/SARS-CoV-2_GTG/protocols/Midnight/V1/
+</code></pre>
+<h2 id="experiment-files">Experiment files</h2>
+<p>Two fies are needed for any experiment.</p>
+<p><code>run_configuration.json</code> and <code>cmd.txt</code></p>
+<h3 id="run_configurationjson">run_configuration.json</h3>
+<p>A title, followed by details for each sample.</p>
+<p>For <strong>ALL</strong> protocols with <strong>Native</strong> barcodes, it would look something like this:</p>
+<pre><code>{
+  "title": "SARS-CoV-2 kirby_artic-4 nCoV_694,699,706,707,711,712,690,708,660,673,NegRT",
+  "samples": [
+    {
+      "name": "nCoV_694",
+      "description": "",
+      "barcodes": [ "NB01" ]
+    },
+    {
+      "name": "nCoV_699",
+      "description": "",
+      "barcodes": [ "NB02" ]
+    },
+    {
+      "name": "nCoV_706",
+      "description": "",
+      "barcodes": [ "NB03" ]
+    },
+    {
+      "name": "nCoV_707",
+      "description": "",
+      "barcodes": [ "NB04" ]
+    },
+    {
+      "name": "nCoV_711",
+      "description": "",
+      "barcodes": [ "NB05" ]
+    },
+    {
+      "name": "nCoV_712",
+      "description": "",
+      "barcodes": [ "NB06" ]
+    },
+    {
+      "name": "nCoV_690",
+      "description": "",
+      "barcodes": [ "NB07" ]
+    },
+    {
+      "name": "nCoV_708",
+      "description": "",
+      "barcodes": [ "NB08" ]
+    },
+    {
+      "name": "nCoV_660",
+      "description": "",
+      "barcodes": [ "NB09" ]
+    },
+    {
+      "name": "nCoV_673",
+      "description": "",
+      "barcodes": [ "NB10" ]
+    },
+    {
+      "name": "nCoV_NegRT",
+      "description": "",
+      "barcodes": [ "NB11" ]
+    }
+  ]
+}
+</code></pre>
+<p>for For <strong>ALL</strong> protocols with <strong>Rapid</strong> barcodes, it would look something like this:</p>
+<pre><code>{
+  "title": "SARS-CoV-2 kirby-41",
+  "samples": [
+    {
+      "name": "nCoV_1634",
+      "description": "",
+      "barcodes": [ "BC01" ]
+    },
+    {
+      "name": "nCoV_1646",
+      "description": "",
+      "barcodes": [ "BC02" ]
+    },
+    {
+      "name": "nCoV_1645",
+      "description": "",
+      "barcodes": [ "BC03" ]
+    },
+    {
+      "name": "nCoV_1628",
+      "description": "",
+      "barcodes": [ "BC04" ]
+    },
+    {
+      "name": "nCoV_1664",
+      "description": "",
+      "barcodes": [ "BC05" ]
+    },
+    {
+      "name": "nCoV_1644",
+      "description": "",
+      "barcodes": [ "BC06" ]
+    },
+    {
+      "name": "nCoV_1641",
+      "description": "",
+      "barcodes": [ "BC07" ]
+    },
+    {
+      "name": "nCoV_1638",
+      "description": "",
+      "barcodes": [ "BC08" ]
+    },
+    {
+      "name": "nCoV_1642",
+      "description": "",
+      "barcodes": [ "BC09" ]
+    },
+    {
+      "name": "nCoV_1647",
+      "description": "",
+      "barcodes": [ "BC10" ]
+    },
+    {
+      "name": "nCoV_1648",
+      "description": "",
+      "barcodes": [ "BC11" ]
+    }
+
+  ]
+}
+</code></pre>
+<p>for For <strong>ALL</strong> protocols with <strong>ONE SAMPLE</strong>/NO barcodes, it would look something like this:</p>
+<pre><code>{
+  "title": "SARS-CoV-2 kirby-47"
+}
+</code></pre>
+<h3 id="cmdtxt">cmd.txt</h3>
+<p>This file is just a text file to keep track of the command being run.</p>
+<p>You need to parse the <code>fastq_pass</code> folder to RAMPART.</p>
+<p>For <strong>ARTIC</strong> with <strong>NATIVE</strong> barcodes:</p>
+<pre><code>rampart --verbose --protocol ~/artic-ncov2019/rampart/ --ports 4010 4011 --basecalledPath /data/PLPL172071/Kirby_ARTIC_V3_690-712/20200828_0046_1C_PAF09161_1c3442d1/fastq_pass/
+</code></pre>
+<p>for <strong>Eden</strong> with <strong>NATIVE</strong> barcodes:</p>
+<pre><code>rampart --verbose --protocol ~/SARS-CoV-2_GTG/protocols/Kirby/V1/ --ports 4010 4011 --basecalledPath /data/PLPL172071/Kirby_ARTIC_V3_690-712/20200828_0046_1C_PAF09161_1c3442d1/fastq_pass/
+</code></pre>
+<p>for <strong>Midnight</strong> with <strong>NATIVE</strong> barcodes:</p>
+<pre><code>rampart --verbose --protocol ~/SARS-CoV-2_GTG/protocols/Midnight/V1/ --ports 4010 4011 --basecalledPath /data/PLPL172071/Kirby_ARTIC_V3_690-712/20200828_0046_1C_PAF09161_1c3442d1/fastq_pass/
+</code></pre>
+<p>for <strong>Eden</strong> with <strong>RAPID</strong> barcodes:</p>
+<p>it's the same as above, but with added flags to parse through to porechop
+<code>--annotationOptions require_two_barcodes="False" barcode_set="rapid"</code></p>
+<pre><code>rampart --verbose --protocol /home/prom/SARS-CoV-2_GTG/protocols/Kirby/V1/ --ports 4010 4011 --basecalledPath /data/PQPR302183/kirby_artic_2/20201218_0548_1G_PAF28510_509ee0c7/fastq_pass/ --annotationOptions require_two_barcodes="False" barcode_set="rapid"
+</code></pre>
+<p>for <strong>Midnight</strong> with <strong>RAPID</strong> barcodes:</p>
+<pre><code>rampart --verbose --protocol /home/prom/SARS-CoV-2_GTG/protocols/Midnight/V1/ --ports 4010 4011 --basecalledPath /data/PQPR302183/kirby_artic_2/20201218_0548_1G_PAF28510_509ee0c7/fastq_pass/ --annotationOptions require_two_barcodes="False" barcode_set="rapid"
+</code></pre>
               
             </div>
           </div>

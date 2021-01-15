@@ -1,6 +1,11 @@
 # SARS-CoV-2_GTG
 Genomic Tech's COVID sequencing
 
+For more info please see:
+
+[Full documentation and tutorial](https://psy-fer.github.io/SARS-CoV-2_GTG/)
+
+
 This is a living git, that will change over time as we test out various methods.
 We are mostly using a 14 primer scheme, which requires some changes to the artic protocol
 

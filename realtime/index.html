@@ -356,6 +356,8 @@ git clone https://github.com/Psy-Fer/SARS-CoV-2_GTG.git
 <p>for <strong>Midnight</strong> with <strong>RAPID</strong> barcodes:</p>
 <pre><code>rampart --verbose --protocol /home/prom/SARS-CoV-2_GTG/protocols/Midnight/V1/ --ports 4010 4011 --basecalledPath /data/PQPR302183/kirby_artic_2/20201218_0548_1G_PAF28510_509ee0c7/fastq_pass/ --annotationOptions require_two_barcodes="False" barcode_set="rapid"
 </code></pre>
+<p>If you have a single sample with no barcoding, use the matching protocol, but the results will be in the "unassigned" group within RAMPART</p>
+<p>Executing the commands with &amp; and screen is advised. (see tutorial for more information)</p>
               
             </div>
           </div>

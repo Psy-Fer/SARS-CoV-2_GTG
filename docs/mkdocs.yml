@@ -3,6 +3,7 @@ nav:
     - Home: index.md
     - Protocols: protocols.md
     - Sequencing: seq.md
+    - Install: install.md
     - Real-time monitoring: realtime.md
     - Analysis: analysis.md
     - Tutorial: tute.md

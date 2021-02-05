@@ -144,12 +144,97 @@
 <p>We mostly use medaka for our routine samples. Either method works well enough for contact tracing and lineage analysis.</p>
 <h2 id="nanopolish">Nanopolish</h2>
 <h3 id="basic-pipeline">Basic pipeline</h3>
+<h4 id="gather">Gather</h4>
+<p>Collects the reads which pass quality and length filtering. The <code>--min-length/--max-length</code> flags depend on if you used the ligation kit or rapid kit.</p>
 <h3 id="single-sample">Single sample</h3>
 <h3 id="multiple-samples">Multiple samples</h3>
 <h2 id="medaka">Medaka</h2>
 <h3 id="basic-pipeline_1">Basic pipeline</h3>
 <h3 id="single-sample_1">Single sample</h3>
 <h3 id="multiple-samples_1">Multiple samples</h3>
+<p>folder structure</p>
+<pre><code>PKRP008209
+├── base
+├── medaka
+├── nanopolish
+└── PKRP008209
+    └── 1905-8
+        └── 20210113_0459_1C_PAF26262_d0402aba
+            ├── fastq_fail
+            └── fastq_pass
+</code></pre>
+<p>Make folders</p>
+<pre><code>mkdir base medaka nanopolish
+</code></pre>
+<p>in the base folder</p>
+<pre><code>cd base
+</code></pre>
+<p>Set up variable for run prefix (in this example, it is PKRP008209)</p>
+<pre><code>RUN=PKRP008209
+</code></pre>
+<h4 id="gather_1">Gather</h4>
+<p>Collects the reads which pass quality and length filtering. The <code>--min-length/--max-length</code> flags depend on if you used the ligation kit or rapid kit.</p>
+<h4 id="ligation">Ligation</h4>
+<p><strong>ARTIC 400bp primers</strong></p>
+<pre><code>artic gather --min-length 300 --max-length 600 --prefix ${RUN} --directory ../${RUN}/*/ --no-fast5s
+</code></pre>
+<p><strong>Midnight 1200bp primers</strong></p>
+<pre><code>artic gather --min-length 1000 --max-length 1400 --prefix ${RUN} --directory ../${RUN}/*/ --no-fast5s
+</code></pre>
+<p><strong>Eden/Kirby 2500bp primers</strong></p>
+<pre><code>artic gather --min-length 2300 --max-length 2700 --prefix ${RUN} --directory ../${RUN}/*/ --no-fast5s
+</code></pre>
+<h4 id="rapid">Rapid</h4>
+<p><strong>ARTIC 400bp primers</strong></p>
+<pre><code>Probably not a good idea to use the rapid kit on 400bp amplicons, as it will make many fragments shorter then 300bp. The basecallers struggle with sequences smaller than this.
+</code></pre>
+<p><strong>Midnight 1200bp primers</strong></p>
+<pre><code>artic gather --min-length 300 --max-length 1400 --prefix ${RUN} --directory ../${RUN}/*/ --no-fast5s
+</code></pre>
+<p><strong>Eden/Kirby 2500bp primers</strong></p>
+<pre><code>artic gather --min-length 300 --max-length 2700 --prefix ${RUN} --directory ../${RUN}/*/ --no-fast5s
+</code></pre>
+<h4 id="demultiplexing">Demultiplexing</h4>
+<h4 id="ligation_1">Ligation</h4>
+<pre><code>artic demultiplex --threads 8 ${RUN}_fastq_pass.fastq
+</code></pre>
+<h4 id="rapid_1">Rapid</h4>
+<pre><code>porechop --verbosity 2 --untrimmed -i "${RUN}_fastq_pass.fastq" -b ./ --rapid_barcodes --discard_middle --barcode_threshold 80 --threads 8 --check_reads 10000 --barcode_diff 5 &gt; ${RUN}_fastq_pass.fastq.demultiplexreport.txt
+
+# it wont name the files properly this way, so rename them with this
+
+for file in BC*.fastq; do mv $file ${RUN}_fastq_pass-${file}; done
+</code></pre>
+<h4 id="consensus-with-medaka">consensus with medaka</h4>
+<p>using a for loop, we can name each folder and prefix each file with the sample information. Using the syntax: <code>for i in "barcode_number&lt;space&gt;sample_ID"&lt;space&gt;"..."</code></p>
+<p>This will then take the fastq for each barcode_number, 01, 02, etc., and name it with the corresponding sample name, for example, if the sample name is R_nCoV_0013, then the command has the static portion <code>R_nCoV_${a[1]}</code>, and inserts the variable portion with the number, say, 0013. The commands below are for 2 barcoded samples, from barcodes 01 and 02, with their corresponding sample numbers, 0013, 0014. Change this part in the for loop to match the samples you wish to analyse.</p>
+<p>for the barcodes, if you used the ligation method, the barcodes are prefixed with NB, where the rapid barcodes are prefixed with BC. Change in the commands accordingly</p>
+<p>move to the medaka folder</p>
+<pre><code>cd ../medaka
+</code></pre>
+<p><strong>ARTIC 400bp primers</strong></p>
+<pre><code>for i in "01 0013" "02 0014"; do a=( $i ); mkdir midnight_R_nCoV_${a[1]}_${RUN}_NB${a[0]}_medaka; cd midnight_R_nCoV_${a[1]}_${RUN}_NB${a[0]}_medaka; artic minion --minimap2 --medaka --normalise 200 --threads 8 --scheme-directory /data1/software/artic-ncov2019/primer_schemes --read-file ../../base/${RUN}_fastq_pass-NB${a[0]}.fastq nCoV-2019/V3 R_nCoV_${a[1]}; cd ../; done
+</code></pre>
+<p><strong>Midnight 1200bp primers</strong></p>
+<pre><code>for i in "01 0013" "02 0014"; do a=( $i ); mkdir midnight_R_nCoV_${a[1]}_${RUN}_BC${a[0]}_medaka; cd midnight_R_nCoV_${a[1]}_${RUN}_BC${a[0]}_medaka; artic minion --minimap2 --medaka --normalise 200 --threads 8 --scheme-directory /data1/software/SARS-CoV-2_GTG/protocols/Midnight/schemes --read-file ../../base/${RUN}_fastq_pass-BC${a[0]}.fastq nCoV-2019/V1 R_nCoV_${a[1]}; cd ../; done
+</code></pre>
+<p><strong>Eden/Kirby 2500bp primers</strong></p>
+<pre><code>for i in "01 0013" "02 0014"; do a=( $i ); mkdir midnight_R_nCoV_${a[1]}_${RUN}_BC${a[0]}_medaka; cd midnight_R_nCoV_${a[1]}_${RUN}_BC${a[0]}_medaka; artic minion --minimap2 --medaka --normalise 200 --threads 8 --scheme-directory /data1/software/SARS-CoV-2_GTG/protocols/Kirby/schemes --read-file ../../base/${RUN}_fastq_pass-BC${a[0]}.fastq nCoV-2019/V1 R_nCoV_${a[1]}; cd ../; done
+</code></pre>
+<p><strong>Example of medaka only output structure</strong></p>
+<pre><code>PKRP008209/.
+├── base
+├── medaka
+│   ├── kirby_nCoV_1905_PKRP008209_BC09_medaka
+│   ├── kirby_nCoV_1906_PKRP008209_BC10_medaka
+│   ├── kirby_nCoV_1907_PKRP008209_BC11_medaka
+│   └── kirby_nCoV_1908_PKRP008209_BC12_medaka
+└── PKRP008209
+└── 1905-8
+    └── 20210113_0459_1C_PAF26262_d0402aba
+        ├── fastq_fail
+        └── fastq_pass
+</code></pre>
               
             </div>
           </div>

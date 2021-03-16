@@ -18,8 +18,8 @@ Please let me know if anything is unclear, or you have suggestions or questions.
 ## Making custom primer scheme
 
 Working from the original artic-network protocol, we need TWO folders of files.
-The first, is the protocol folder, in this case `protocols/Kirby/V1`
-The second, is the schemes folder, in this case `protocols/Kirby/schemes/nCoV-2019/V1`
+The first, is the protocol folder, in this case `protocols/Eden/V1`
+The second, is the schemes folder, in this case `protocols/Eden/schemes/nCoV-2019/V1`
 
 The First, is used with RAMPART in order to align and display the data with your custom primer set.
 
@@ -102,7 +102,7 @@ Use RAMPART install for v1.1
 NB01, NB02, etc...
 
 ```
-rampart --verbose --protocol /home/grid/SARS-CoV-2_GTG/protocols/Kirby/V1/ --ports 3000 3001 --basecalledPath /data/name/name/20200330_0557_X2_ACW369_55e7e4ce/fastq_pass/
+rampart --verbose --protocol /home/grid/SARS-CoV-2_GTG/protocols/Eden/V1/ --ports 3000 3001 --basecalledPath /data/name/name/20200330_0557_X2_ACW369_55e7e4ce/fastq_pass/
 ```
 
 ### Rapid barcodes
@@ -110,7 +110,7 @@ rampart --verbose --protocol /home/grid/SARS-CoV-2_GTG/protocols/Kirby/V1/ --por
 BC01, BC02, etc...
 
 ```
-rampart --verbose --protocol /home/grid/SARS-CoV-2_GTG/protocols/Kirby/V1/ --ports 5000 5001 --basecalledPath /data/name/name/20200401_0106_X5_ACL109_433d9d25/fastq_pass/ --annotationOptions require_two_barcodes="False" barcode_set="rapid"
+rampart --verbose --protocol /home/grid/SARS-CoV-2_GTG/protocols/Eden/V1/ --ports 5000 5001 --basecalledPath /data/name/name/20200401_0106_X5_ACL109_433d9d25/fastq_pass/ --annotationOptions require_two_barcodes="False" barcode_set="rapid"
 
 ```
 
@@ -131,7 +131,7 @@ artic demultiplex --threads 4 name_fastq_pass.fastq
 
 cd ..
 
-for bc in {01..09}; do mkdir barcode${bc}; cd barcode${bc}; artic minion --normalise 200 --threads 4 --scheme-directory ~/SARS-CoV-2_GTG/protocols/Kirby/schemes --read-file ../asm/name_fastq_pass-NB${bc}.fastq --fast5-directory ../fast5_pass --sequencing-summary ../asm/name_sequencing_summary.txt nCoV-2019/V1 name; cd ../;  done
+for bc in {01..09}; do mkdir barcode${bc}; cd barcode${bc}; artic minion --normalise 200 --threads 4 --scheme-directory ~/SARS-CoV-2_GTG/protocols/Eden/schemes --read-file ../asm/name_fastq_pass-NB${bc}.fastq --fast5-directory ../fast5_pass --sequencing-summary ../asm/name_sequencing_summary.txt nCoV-2019/V1 name; cd ../;  done
 
 
 ```
@@ -165,7 +165,7 @@ artic demultiplex --threads 4 name_fastq_pass.fastq
 
 cd ..
 
-for bc in {01..09}; do mkdir barcode${bc}; cd barcode${bc}; artic minion --minimap2 --medaka --normalise 200 --threads 4 --scheme-directory ~/SARS-CoV-2_GTG/protocols/Kirby/schemes --read-file ../asm/name_fastq_pass-NB${bc}.fastq nCoV-2019/V1 name; cd ../; done
+for bc in {01..09}; do mkdir barcode${bc}; cd barcode${bc}; artic minion --minimap2 --medaka --normalise 200 --threads 4 --scheme-directory ~/SARS-CoV-2_GTG/protocols/Eden/schemes --read-file ../asm/name_fastq_pass-NB${bc}.fastq nCoV-2019/V1 name; cd ../; done
 
 ```
 
@@ -195,13 +195,13 @@ New commands - experimental
     porechop --verbosity 2 --untrimmed -i "PQPR071978_fastq_pass.fastq" -b ./ --rapid_barcodes --discard_middle --barcode_threshold 80 --threads 32 --check_reads 10000 --barcode_diff 5 > PQPR071978_fastq_pass.fastq.demultiplexreport.txt
 
     # Nanopolish
-    RUN=PQPR071978 && for bc in {01..12}; do mkdir barcode${bc}; cd barcode${bc}; artic minion --normalise 200 --threads 32 --scheme-directory /directflow/KCCGGenometechTemp/projects/jamfer/SARS-CoV-2/SARS-CoV-2_GTG/protocols/Kirby/schemes --read-file ../../base/${RUN}_fastq_pass-BC${bc}.fastq --fast5-directory ../../${RUN}/*/fast5_pass --sequencing-summary ../../${RUN}_summary.txt nCoV-2019/V1 ${RUN}; cd ../; done
+    RUN=PQPR071978 && for bc in {01..12}; do mkdir barcode${bc}; cd barcode${bc}; artic minion --normalise 200 --threads 32 --scheme-directory /directflow/KCCGGenometechTemp/projects/jamfer/SARS-CoV-2/SARS-CoV-2_GTG/protocols/Eden/schemes --read-file ../../base/${RUN}_fastq_pass-BC${bc}.fastq --fast5-directory ../../${RUN}/*/fast5_pass --sequencing-summary ../../${RUN}_summary.txt nCoV-2019/V1 ${RUN}; cd ../; done
 
     # Medaka
-    RUN=PQPR071978 && for bc in {01..12}; do mkdir barcode${bc}; cd barcode${bc}; artic minion --minimap2 --medaka --normalise 200 --threads 32 --scheme-directory /directflow/KCCGGenometechTemp/projects/jamfer/SARS-CoV-2/SARS-CoV-2_GTG/protocols/Kirby/schemes --read-file ../../base/${RUN}_fastq_pass-BC${bc}.fastq nCoV-2019/V1 ${RUN}; cd ../; done
+    RUN=PQPR071978 && for bc in {01..12}; do mkdir barcode${bc}; cd barcode${bc}; artic minion --minimap2 --medaka --normalise 200 --threads 32 --scheme-directory /directflow/KCCGGenometechTemp/projects/jamfer/SARS-CoV-2/SARS-CoV-2_GTG/protocols/Eden/schemes --read-file ../../base/${RUN}_fastq_pass-BC${bc}.fastq nCoV-2019/V1 ${RUN}; cd ../; done
 
     # dRNA - VERY experimental
-    rampart --verbose --protocol /home/prom/SARS-CoV-2_GTG/protocols/Kirby/RNA --ports 6010 6011 --basecalledPath /data/<project>/*/*/fastq_pass/
+    rampart --verbose --protocol /home/prom/SARS-CoV-2_GTG/protocols/Eden/RNA --ports 6010 6011 --basecalledPath /data/<project>/*/*/fastq_pass/
 
 
 
@@ -212,13 +212,13 @@ New commands - experimental
 
 
 
-    for RUN in $(cut -f2 ./list_nat_comms_singles.tsv | sort | uniq | grep GQ); do echo ${RUN}; cd ${RUN}; mkdir base medaka nanopolish; cd base; artic gather --min-length 300 --max-length 2700 --prefix ${RUN} --directory ../${RUN}/ --fast5-directory ../../../big_one/${RUN}/${RUN}/*/ ; ls -la; porechop --verbosity 2 --untrimmed -i "${RUN}_fastq_pass.fastq" -b ./ --rapid_barcodes --discard_middle --barcode_threshold 80 --threads 32 --check_reads 10000 --barcode_diff 5 > ${RUN}_fastq_pass.fastq.demultiplexreport.txt; for f in BC*.fastq; do mv $f ${RUN}_fastq_pass-${f}; ls -la; done; cd ../nanopolish; for BC in $(grep ${RUN} ../../list_nat_comms_singles.tsv | cut -f3 | cut -d 'B' -f 2); do NAME=$(grep ${RUN} ../../list_nat_comms_singles.tsv | grep RB${BC} | cut -f1); mkdir ${NAME}_${RUN}_BC${BC}_nanopolish; cd ${NAME}_${RUN}_BC${BC}_nanopolish; artic minion --normalise 200 --threads 32 --scheme-directory /directflow/KCCGGenometechTemp/projects/jamfer/SARS-CoV-2/SARS-CoV-2_GTG/protocols/Kirby/schemes --read-file ../../base/${RUN}_fastq_pass-BC${BC}.fastq --fast5-directory ../../../../big_one/${RUN}/${RUN}/*/fast5_pass --sequencing-summary ../../${RUN}/${RUN}_summary.txt nCoV-2019/V1 ${NAME}_${RUN}_BC${BC}_nanopolish; cd .. ; done ; cd ../..; done
+    for RUN in $(cut -f2 ./list_nat_comms_singles.tsv | sort | uniq | grep GQ); do echo ${RUN}; cd ${RUN}; mkdir base medaka nanopolish; cd base; artic gather --min-length 300 --max-length 2700 --prefix ${RUN} --directory ../${RUN}/ --fast5-directory ../../../big_one/${RUN}/${RUN}/*/ ; ls -la; porechop --verbosity 2 --untrimmed -i "${RUN}_fastq_pass.fastq" -b ./ --rapid_barcodes --discard_middle --barcode_threshold 80 --threads 32 --check_reads 10000 --barcode_diff 5 > ${RUN}_fastq_pass.fastq.demultiplexreport.txt; for f in BC*.fastq; do mv $f ${RUN}_fastq_pass-${f}; ls -la; done; cd ../nanopolish; for BC in $(grep ${RUN} ../../list_nat_comms_singles.tsv | cut -f3 | cut -d 'B' -f 2); do NAME=$(grep ${RUN} ../../list_nat_comms_singles.tsv | grep RB${BC} | cut -f1); mkdir ${NAME}_${RUN}_BC${BC}_nanopolish; cd ${NAME}_${RUN}_BC${BC}_nanopolish; artic minion --normalise 200 --threads 32 --scheme-directory /directflow/KCCGGenometechTemp/projects/jamfer/SARS-CoV-2/SARS-CoV-2_GTG/protocols/Eden/schemes --read-file ../../base/${RUN}_fastq_pass-BC${BC}.fastq --fast5-directory ../../../../big_one/${RUN}/${RUN}/*/fast5_pass --sequencing-summary ../../${RUN}/${RUN}_summary.txt nCoV-2019/V1 ${NAME}_${RUN}_BC${BC}_nanopolish; cd .. ; done ; cd ../..; done
 
-    for RUN in $(cut -f2 ./list_nat_comms_singles.tsv | sort | uniq | grep GQ); do echo ${RUN}; cd ${RUN}; cd medaka; for BC in $(grep ${RUN} ../../list_nat_comms_singles.tsv | cut -f3 | cut -d 'B' -f 2); do NAME=$(grep ${RUN} ../../list_nat_comms_singles.tsv | grep RB${BC} | cut -f1); mkdir ${NAME}_${RUN}_BC${BC}_medaka; cd ${NAME}_${RUN}_BC${BC}_medaka; artic minion --minimap2 --medaka --normalise 200 --threads 32 --scheme-directory /directflow/KCCGGenometechTemp/projects/jamfer/SARS-CoV-2/SARS-CoV-2_GTG/protocols/Kirby/schemes --read-file ../../base/${RUN}_fastq_pass-BC${BC}.fastq nCoV-2019/V1 ${NAME}_${RUN}_BC${BC}_medaka; cd .. ; done ; cd ../..; done
+    for RUN in $(cut -f2 ./list_nat_comms_singles.tsv | sort | uniq | grep GQ); do echo ${RUN}; cd ${RUN}; cd medaka; for BC in $(grep ${RUN} ../../list_nat_comms_singles.tsv | cut -f3 | cut -d 'B' -f 2); do NAME=$(grep ${RUN} ../../list_nat_comms_singles.tsv | grep RB${BC} | cut -f1); mkdir ${NAME}_${RUN}_BC${BC}_medaka; cd ${NAME}_${RUN}_BC${BC}_medaka; artic minion --minimap2 --medaka --normalise 200 --threads 32 --scheme-directory /directflow/KCCGGenometechTemp/projects/jamfer/SARS-CoV-2/SARS-CoV-2_GTG/protocols/Eden/schemes --read-file ../../base/${RUN}_fastq_pass-BC${BC}.fastq nCoV-2019/V1 ${NAME}_${RUN}_BC${BC}_medaka; cd .. ; done ; cd ../..; done
 
     # medaka 1.1.1
 
-    for RUN in $(cut -f2 ./list_nat_comms_singles.tsv | sort | uniq | grep GQ); do echo ${RUN}; cd ${RUN}; mkdir medaka_2; cd medaka_2; for BC in $(grep ${RUN} ../../list_nat_comms_singles.tsv | cut -f3 | cut -d 'B' -f 2); do NAME=$(grep ${RUN} ../../list_nat_comms_singles.tsv | grep RB${BC} | cut -f1); mkdir ${NAME}_${RUN}_BC${BC}_medaka_2; cd ${NAME}_${RUN}_BC${BC}_medaka_2; artic minion --minimap2 --medaka --normalise 200 --medaka-model r941_min_high_g360 --threads 32 --scheme-directory /directflow/KCCGGenometechTemp/projects/jamfer/SARS-CoV-2/SARS-CoV-2_GTG/protocols/Kirby/schemes --read-file ../../base/${RUN}_fastq_pass-BC${BC}.fastq nCoV-2019/V1 ${NAME}_${RUN}_BC${BC}_medaka_2; cd .. ; done ; cd ../..; done
+    for RUN in $(cut -f2 ./list_nat_comms_singles.tsv | sort | uniq | grep GQ); do echo ${RUN}; cd ${RUN}; mkdir medaka_2; cd medaka_2; for BC in $(grep ${RUN} ../../list_nat_comms_singles.tsv | cut -f3 | cut -d 'B' -f 2); do NAME=$(grep ${RUN} ../../list_nat_comms_singles.tsv | grep RB${BC} | cut -f1); mkdir ${NAME}_${RUN}_BC${BC}_medaka_2; cd ${NAME}_${RUN}_BC${BC}_medaka_2; artic minion --minimap2 --medaka --normalise 200 --medaka-model r941_min_high_g360 --threads 32 --scheme-directory /directflow/KCCGGenometechTemp/projects/jamfer/SARS-CoV-2/SARS-CoV-2_GTG/protocols/Eden/schemes --read-file ../../base/${RUN}_fastq_pass-BC${BC}.fastq nCoV-2019/V1 ${NAME}_${RUN}_BC${BC}_medaka_2; cd .. ; done ; cd ../..; done
 
     --medaka-model r941_prom_high_g4011
 
